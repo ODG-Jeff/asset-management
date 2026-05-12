@@ -1,0 +1,5 @@
+"Timestamp","Action","OriginalPath","NewPath","SizeMB","Rule","Notes"
+"2026-05-11 21:48:06","git-worktree-remove","C:\ODG\repos\dhtw\.claude\worktrees\ecstatic-roentgen-8fff4e","","","stale-worktree-clean","Branch claude/ecstatic-roentgen-8fff4e at same commit as main, no untracked, no uncommitted"
+"2026-05-11 21:48:06","copy-to-quarantine","C:\ODG\repos\dhtw\.claude\worktrees\naughty-galileo-33bf5d\generations.db","C:\ODG\_quarantine\2026-05-11\dhtw-worktree-naughty-galileo-33bf5d\generations.db","0.04","preserve-sqlite-main","SQLite main file; worktree NOT removed"
+"2026-05-11 21:48:06","copy-to-quarantine","C:\ODG\repos\dhtw\.claude\worktrees\naughty-galileo-33bf5d\generations.db-shm","C:\ODG\_quarantine\2026-05-11\dhtw-worktree-naughty-galileo-33bf5d\generations.db-shm","0.03","preserve-sqlite-shm","SQLite shared-memory file"
+"2026-05-11 21:48:06","copy-to-quarantine","C:\ODG\repos\dhtw\.claude\worktrees\naughty-galileo-33bf5d\generations.db-wal","C:\ODG\_quarantine\2026-05-11\dhtw-worktree-naughty-galileo-33bf5d\generations.db-wal","0.14","preserve-sqlite-wal","SQLite write-ahead log"

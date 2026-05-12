@@ -77,6 +77,12 @@ $ExcludePaths = @(
     "$env:USERPROFILE\AppData\Local\Packages"
     "$env:USERPROFILE\AppData\Local\Temp"
     "$env:USERPROFILE\AppData\Roaming\Microsoft"
+    "$env:USERPROFILE\AppData\Local\Godot"            # Godot editor cache
+    "$env:USERPROFILE\AppData\Local\Programs"         # User-installed apps (VS Code, etc.) — bundled assets, never user content
+    "$env:USERPROFILE\AppData\Local\Google"           # Chrome user data — extension assets, web caches
+    "$env:USERPROFILE\AppData\Local\Logseq"           # Logseq app resources
+    "$env:USERPROFILE\AppData\Roaming\Python"         # pip site-packages (skimage test data, etc.)
+    "$env:USERPROFILE\AppData\Roaming\Stardock"       # Fences backups — not art assets
     "$env:USERPROFILE\.cache"
     "$env:USERPROFILE\.nuget"
     "$env:USERPROFILE\.gradle"

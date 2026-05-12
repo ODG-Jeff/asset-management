@@ -1,7 +1,7 @@
 # ODG Asset Audit — Headline Summary (ODG-Audit-2026-05-11)
 
-- **Rows:** 7,172
-- **Total size:** 14.57 GB
+- **Rows:** 6,508
+- **Total size:** 14.53 GB
 
 ## By Location (count, MB)
 ```
@@ -9,7 +9,7 @@
 Location                      
 ODG_Other        3499  11503.1
 Repo_DHTW        2024   2511.1
-Other            1156    526.8
+Other             492    487.9
 Downloads         249    267.5
 Documents         148     22.2
 Repo_TLL           47     58.6
@@ -22,11 +22,11 @@ OneDrive_Other      1      1.1
 ```
               count  size_mb
 Category                    
-2D_Raster      5706   4307.9
-Audio           884    992.0
+2D_Raster      5203   4284.4
+Audio           817    989.7
 3D_Model        203   1701.5
-2D_Vector       187     61.0
-Archive          92   7790.9
+2D_Vector        94     49.5
+Archive          91   7789.3
 Game_Project     70      1.2
 Video            17     45.3
 Document         12     20.6
@@ -37,45 +37,45 @@ Document         12     20.6
 ```
            count  size_mb
 Extension                
-.png        5116   3655.4
-.jpg         547    552.3
-.mp3         511     25.8
-.wav         331    961.2
+.png        4635   3635.7
+.jpg         529    548.8
+.mp3         447     23.5
+.wav         328    961.1
 .glb         194   1645.8
-.svg         171     60.4
-.zip          92   7790.9
+.zip          91   7789.3
+.svg          78     48.9
 .gd           62      1.1
 .flac         42      5.0
-.gif          41     99.9
+.gif          37     99.6
 ```
 
 ## Top 10 extensions by size
 ```
            count  size_mb
 Extension                
-.zip          92   7790.9
-.png        5116   3655.4
+.zip          91   7789.3
+.png        4635   3635.7
 .glb         194   1645.8
-.wav         331    961.2
-.jpg         547    552.3
-.gif          41     99.9
-.svg         171     60.4
+.wav         328    961.1
+.jpg         529    548.8
+.gif          37     99.6
 .blend         9     55.6
+.svg          78     48.9
 .mp4          16     36.2
-.mp3         511     25.8
+.mp3         447     23.5
 ```
 
 ## Duplicates (SHA256 exact)
-- **Files in dupe groups:** 3,436
-- **Unique groups:** 939
-- **Wasted space:** 2713.1 MB (2.65 GB)
+- **Files in dupe groups:** 2,992
+- **Unique groups:** 728
+- **Wasted space:** 2703.3 MB (2.64 GB)
 
 ### Dupe files by Location
 ```
 Location
 Repo_DHTW     1968
 ODG_Other      882
-Other          501
+Other           57
 Repo_Other      31
 Downloads       31
 Documents       20
@@ -87,7 +87,7 @@ Repo_TLL         3
 loc
 Repo_DHTW     1671.1
 ODG_Other      722.9
-Other          285.2
+Other          275.4
 Downloads       31.8
 Repo_Other       1.7
 Documents        0.3
@@ -167,7 +167,7 @@ Archive   ODG_Other     77   7648.3
 3D_Model  Repo_DHTW    160   1286.4
 2D_Raster Repo_DHTW   1185   1126.2
 Audio     ODG_Other     46    895.8
-2D_Raster Other        962    446.4
+2D_Raster Other        459    422.9
 3D_Model  ODG_Other     30    224.1
 Archive   Downloads      6    119.7
 3D_Model  Downloads      5    100.1

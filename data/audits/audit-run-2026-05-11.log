@@ -1,0 +1,142 @@
+**********************
+PowerShell transcript start
+Start time: 20260511213513
+Username: DRAGONFLY\ODG_j
+RunAs User: DRAGONFLY\ODG_j
+Configuration Name: 
+Machine: DRAGONFLY (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoProfile -NonInteractive -Command $today = Get-Date -Format 'yyyy-MM-dd'; $csv = "C:\ODG\repos\asset-management\data\audits\ODG-Audit-$today.csv"; $log = "C:\ODG\repos\asset-management\data\audits\audit-run-$today.log"; Start-Transcript -Path $log -Force | Out-Null; & "C:\ODG\repos\asset-management\scripts\Audit-ODGFiles.ps1" -OutputPath $csv; Stop-Transcript | Out-Null
+; $_ec = if ($null -ne $LASTEXITCODE) { $LASTEXITCODE } elseif ($?) { 0 } else { 1 }
+; (Get-Location).Path | Out-File -FilePath 'C:\Users\ODG_j\AppData\Local\Temp\claude\claude-pwd-ps-63da' -Encoding utf8 -NoNewline
+; exit $_ec
+Process ID: 15328
+PSVersion: 7.6.0
+PSEdition: Core
+GitCommitId: 7.6.0
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+=== ODG Asset Audit ===
+Output:        C:\ODG\repos\asset-management\data\audits\ODG-Audit-2026-05-11.csv
+Include hash:  True
+Min size:      10 KB
+Started:       2026-05-11 21:35:13
+
+Walking C:\ ... (this can take 5-20 minutes depending on disk size)
+
+Scanning: C:\.claude
+Scanning: C:\$SysReset
+Scanning: C:\Apps
+Scanning: C:\backup
+Scanning: C:\c
+Scanning: C:\dell
+Scanning: C:\Dev
+Scanning: C:\Documents and Settings
+Scanning: C:\Downloads
+Scanning: C:\Drivers
+Scanning: C:\inetpub
+Scanning: C:\langpacks
+Scanning: C:\MFG
+Scanning: C:\ODG
+  ...scanned 5000 files, matched 3023 so far
+  ...scanned 10000 files, matched 4904 so far
+Scanning: C:\OneDriveTemp
+Scanning: C:\PerfLogs
+Scanning: C:\System Repair
+Scanning: C:\The Vault
+Scanning: C:\tmp
+Scanning: C:\Users
+  ...scanned 15000 files, matched 5941 so far
+  ...scanned 20000 files, matched 6141 so far
+  ...scanned 25000 files, matched 6144 so far
+  ...scanned 30000 files, matched 6229 so far
+  ...scanned 35000 files, matched 6234 so far
+  ...scanned 40000 files, matched 6234 so far
+  ...scanned 45000 files, matched 6239 so far
+  ...scanned 50000 files, matched 6322 so far
+  ...scanned 55000 files, matched 6418 so far
+  ...scanned 60000 files, matched 6420 so far
+  ...scanned 65000 files, matched 6420 so far
+  ...scanned 70000 files, matched 6420 so far
+  ...scanned 75000 files, matched 6420 so far
+  ...scanned 80000 files, matched 6420 so far
+  ...scanned 85000 files, matched 6420 so far
+  ...scanned 90000 files, matched 6420 so far
+  ...scanned 95000 files, matched 6420 so far
+  ...scanned 100000 files, matched 6420 so far
+  ...scanned 105000 files, matched 6420 so far
+  ...scanned 110000 files, matched 6420 so far
+  ...scanned 115000 files, matched 6420 so far
+  ...scanned 120000 files, matched 6420 so far
+  ...scanned 125000 files, matched 6420 so far
+  ...scanned 130000 files, matched 6420 so far
+  ...scanned 135000 files, matched 6441 so far
+  ...scanned 140000 files, matched 6441 so far
+  ...scanned 145000 files, matched 6513 so far
+  ...scanned 150000 files, matched 6565 so far
+  ...scanned 155000 files, matched 6567 so far
+  ...scanned 160000 files, matched 6567 so far
+  ...scanned 165000 files, matched 6567 so far
+  ...scanned 170000 files, matched 6579 so far
+  ...scanned 175000 files, matched 6595 so far
+  ...scanned 180000 files, matched 6595 so far
+  ...scanned 185000 files, matched 6600 so far
+  ...scanned 190000 files, matched 6603 so far
+  ...scanned 195000 files, matched 6625 so far
+  ...scanned 200000 files, matched 6625 so far
+  ...scanned 205000 files, matched 6625 so far
+  ...scanned 210000 files, matched 6637 so far
+  ...scanned 215000 files, matched 6645 so far
+  ...scanned 220000 files, matched 7017 so far
+
+Detecting duplicates by SHA256...
+
+=== AUDIT COMPLETE ===
+Elapsed:       00:00:29
+Files scanned: 224509
+Assets found:  7172
+Total size:    14920.59 MB (14.57 GB)
+
+By Location:
+
+Location       Count   SizeMB
+--------       -----   ------
+ODG_Other       3499 11503.10
+Repo_DHTW       2024  2511.10
+Other           1156   526.80
+Downloads        249   267.50
+Documents        148    22.20
+Repo_TLL          47    58.60
+Repo_Other        32    20.00
+ODG_Vault         16    10.10
+OneDrive_Other     1     1.10
+
+By Category:
+
+Category     Count  SizeMB
+--------     -----  ------
+2D_Raster     5706 4308.00
+Audio          884  992.00
+3D_Model       203 1701.50
+2D_Vector      187   61.00
+Archive         92 7790.90
+Game_Project    70    1.20
+Video           17   45.30
+Document        12   20.60
+3D_Texture       1    0.00
+
+Likely scratch/temp files: 26
+Exact duplicates: 3436 files across 939 groups
+
+CSV ready at: C:\ODG\repos\asset-management\data\audits\ODG-Audit-2026-05-11.csv
+
+Next: open in Excel, sort by Location, then by Modified desc, to triage.
+**********************
+PowerShell transcript end
+End time: 20260511213543
+**********************

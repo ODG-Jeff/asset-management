@@ -1,0 +1,13 @@
+# Quarantine and intake live outside the repo (under C:\ODG\), but guard against accidents:
+_quarantine/
+_intake/
+
+# Editor noise
+.vscode/
+*.swp
+*.bak
+*~
+
+# OS
+Thumbs.db
+.DS_Store

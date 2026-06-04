@@ -11,3 +11,6 @@ _intake/
 # OS
 Thumbs.db
 .DS_Store
+
+# Brainstorming session content (per-machine, not shared)
+.superpowers/

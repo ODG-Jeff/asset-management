@@ -106,3 +106,33 @@ def test_wip_guard_protects_recent_repo_file(tmp_studio):
     outcome, _ = _sort(src, tmp_studio=tmp_studio)
     assert outcome == "wip-protected"
     assert canonical.read_bytes() == b"wip"
+
+
+def test_parked_file_is_actually_moved_to_unsorted(tmp_studio):
+    src = tmp_studio["intake"] / "mystery.bin"
+    src.write_bytes(b"\x00" * 16)
+    outcome, _ = _sort(src, tmp_studio=tmp_studio)
+    assert outcome == "parked"
+    assert not src.exists(), "park branch left the file in the intake dir"
+    # Find it in unsorted/<date>/
+    matches = list(tmp_studio["unsorted"].rglob("mystery.bin"))
+    assert len(matches) == 1, f"expected file at unsorted/<date>/mystery.bin, found {matches}"
+
+
+def test_file_already_at_canonical_home_gets_sidecar(tmp_studio):
+    # Simulates a Blender script writing directly to repos/<project>/...
+    # Sort_one should detect this and still write the vault sidecar.
+    # Filename matches THEME_RE so the router lands on the same canonical path.
+    canonical = tmp_studio["repos"] / "dhtw" / "assets" / "sleds" / "themes" / "pirate" / "hull_pirate_v8_01.png"
+    canonical.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy(FIX / "comfyui_dhtw_sled.png", canonical)
+    # Backdate so WIP guard doesn't fire.
+    import os
+    ancient = __import__("time").time() - (30 * 86400)
+    os.utime(canonical, (ancient, ancient))
+    outcome, _ = _sort(canonical, tmp_studio=tmp_studio)
+    assert outcome == "routed", f"expected in-place routing, got {outcome}"
+    sidecar = tmp_studio["vault"] / "Opal Dragonfly Games" / "Projects" / "DHTW" / "Assets" / "hull_pirate_v8_01.md"
+    assert sidecar.exists(), "in-place file did not get a vault sidecar"
+    # File must remain at canonical home.
+    assert canonical.exists()

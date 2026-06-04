@@ -1,4 +1,5 @@
 import logging
+import shutil
 import signal
 import threading
 import time
@@ -33,10 +34,10 @@ def sort_one(path: Path, *, state: State | None = None) -> str:
     if isinstance(decision, Park):
         decision.destination.mkdir(parents=True, exist_ok=True)
         park_dest = decision.destination / path.name
-        if not park_dest.exists():
-            path.rename(park_dest) if path.parent == decision.destination else None
-        state.record_park(signals.hash_sha256, path, reason=decision.reason)
-        log.info("parked path=%s reason=%s", path, decision.reason)
+        if path.resolve() != park_dest.resolve() and not park_dest.exists():
+            shutil.move(str(path), str(park_dest))
+        state.record_park(signals.hash_sha256, park_dest, reason=decision.reason)
+        log.info("parked path=%s reason=%s", park_dest, decision.reason)
         return "parked"
 
     assert isinstance(decision, Route)
@@ -47,17 +48,24 @@ def sort_one(path: Path, *, state: State | None = None) -> str:
         repos_root=REPOS,
     )
     if isinstance(move_result, SkipResult):
+        # If the source is already at its canonical home, still write the sidecar
+        # so the file shows up in the vault find-layer (Blender scripts often
+        # write directly to repos/<project>/...).
+        if move_result.reason == "source-inside-repos" and path == decision.destination:
+            _write_sidecar_for(decision, signals, source=path)
+            state.record_route(
+                signals.hash_sha256,
+                source=path,
+                destination=path,
+                rule=decision.rule,
+            )
+            log.info("in-place routed rule=%s dest=%s", decision.rule, path)
+            return "routed"
         state.record_park(signals.hash_sha256, path, reason=move_result.reason)
         log.info("skipped path=%s reason=%s", path, move_result.reason)
         return move_result.reason
 
-    sidecar_path = _sidecar_path_for(decision, signals)
-    ctx = SidecarContext(
-        template=decision.sidecar_template,
-        sidecar_path=sidecar_path,
-        data=_sidecar_data(decision, signals, source=path),
-    )
-    write_sidecar(ctx)
+    _write_sidecar_for(decision, signals, source=path)
     state.record_route(
         signals.hash_sha256,
         source=path,
@@ -66,6 +74,16 @@ def sort_one(path: Path, *, state: State | None = None) -> str:
     )
     log.info("routed rule=%s dest=%s", decision.rule, move_result.destination)
     return "routed"
+
+
+def _write_sidecar_for(decision: "Route", signals, *, source: Path) -> None:
+    sidecar_path = _sidecar_path_for(decision, signals)
+    ctx = SidecarContext(
+        template=decision.sidecar_template,
+        sidecar_path=sidecar_path,
+        data=_sidecar_data(decision, signals, source=source),
+    )
+    write_sidecar(ctx)
 
 
 def _sidecar_path_for(decision: Route, signals) -> Path:

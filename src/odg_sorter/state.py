@@ -101,6 +101,15 @@ class State:
         ts, ev = row
         return Heartbeat(timestamp=datetime.fromisoformat(ts), events_processed=ev)
 
+    def close(self) -> None:
+        self._conn.close()
+
+    def __enter__(self) -> "State":
+        return self
+
+    def __exit__(self, exc_type, exc, tb) -> None:
+        self.close()
+
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()

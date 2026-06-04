@@ -22,10 +22,20 @@ def main(argv: list[str] | None = None) -> int:
         outcome = sort_one(Path(args.path))
         print(outcome)
         return 0
-
-    # daemon/digest/reconcile come in later tasks.
-    print(f"odg-sorter: cmd={args.cmd} not yet wired")
-    return 0
+    if args.cmd == "daemon":
+        from odg_sorter.main import run_daemon
+        return run_daemon()
+    if args.cmd == "reconcile":
+        from odg_sorter.main import STATE_PATH
+        from odg_sorter.reconcile import reconcile
+        from odg_sorter.state import State
+        state = State(STATE_PATH)
+        result = reconcile(state)
+        print(result)
+        return 0
+    if args.cmd == "digest":
+        print("digest not yet wired")
+        return 0
 
 
 if __name__ == "__main__":

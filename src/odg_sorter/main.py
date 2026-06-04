@@ -1,8 +1,11 @@
 import logging
+import signal
+import threading
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-from odg_sorter.config.paths import QUARANTINE, REPOS, STUDIO_ROOT, VAULT_PROJECTS
+from odg_sorter.config.paths import QUARANTINE, REPOS, STUDIO_ROOT, VAULT_PROJECTS, WATCHED_PATHS
 from odg_sorter.identify import identify
 from odg_sorter.mover import MoveResult, SkipResult, move_into_canonical_home
 from odg_sorter.router import Park, Route, route
@@ -139,3 +142,48 @@ def _mime_for(ext: str) -> str:
         ".flac": "audio/flac",
         ".blend": "application/x-blender",
     }.get(ext.lower(), "application/octet-stream")
+
+
+def run_daemon() -> int:
+    from odg_sorter.reconcile import reconcile
+    from odg_sorter.watcher import Watcher
+
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    state = State(STATE_PATH)
+    events = {"count": 0}
+
+    log.info("starting reconciliation pass")
+    reconcile(state)
+    state.write_heartbeat(events["count"])
+
+    stop = threading.Event()
+
+    def on_landed(path: Path) -> None:
+        try:
+            sort_one(path, state=state)
+        except Exception:
+            log.exception("sort_one failed for %s", path)
+        finally:
+            events["count"] += 1
+
+    watcher = Watcher(watched_paths=WATCHED_PATHS, on_landed=on_landed)
+    watcher.start()
+
+    def handle_sigint(_sig, _frame):
+        log.info("shutdown signal received")
+        stop.set()
+
+    signal.signal(signal.SIGINT, handle_sigint)
+    signal.signal(signal.SIGTERM, handle_sigint)
+
+    last_hb = time.monotonic()
+    try:
+        while not stop.wait(timeout=1.0):
+            if time.monotonic() - last_hb >= 60.0:
+                state.write_heartbeat(events["count"])
+                last_hb = time.monotonic()
+    finally:
+        watcher.stop()
+        state.write_heartbeat(events["count"])
+        log.info("daemon stopped")
+    return 0

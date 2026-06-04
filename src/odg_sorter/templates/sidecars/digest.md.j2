@@ -1,0 +1,35 @@
+---
+type: digest
+generated: {{ generated }}
+period-start: {{ period_start }}
+period-end: {{ period_end }}
+tags: [system/odg-sorter, digest]
+---
+
+# Intake digest — {{ period_start }} to {{ period_end }}
+
+{% if heartbeat_stale -%}
+> ⚠ Heartbeat is stale (last seen {{ heartbeat_ts }}). Daemon may be dead.
+{%- endif %}
+
+## Counts
+- Routed (confident): **{{ counts.routed }}**
+- Parked (ambiguous): **{{ counts.parked }}**
+- Quarantined (displaced duplicates): **{{ counts.quarantined }}**
+- WIP-protected (skipped): **{{ counts.wip_protected }}**
+
+## Parked files awaiting review
+
+{% if parked %}
+{% for p in parked %}- `{{ p.path }}` — {{ p.reason }}
+{% endfor %}
+{% else %}_None._
+{% endif %}
+
+## Recent quarantine events
+
+{% if quarantined %}
+{% for q in quarantined %}- `{{ q.original }}` → `{{ q.quarantined_to }}`
+{% endfor %}
+{% else %}_None._
+{% endif %}

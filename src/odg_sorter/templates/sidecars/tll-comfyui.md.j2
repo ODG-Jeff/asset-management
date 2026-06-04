@@ -1,0 +1,25 @@
+---
+asset: {{ asset }}
+project: tll
+system: {{ system }}
+source-tool: comfyui
+workflow: {{ workflow }}
+model: {{ model }}
+seed: {{ seed }}
+prompt: |
+  {{ prompt | indent(2) }}
+hash: sha256:{{ hash }}
+size: {{ size }}
+mime: {{ mime }}
+ingested: {{ ingested }}
+sorter-rule: {{ rule }}
+canonical-path: {{ canonical_path }}
+ingested-from: {{ ingested_from }}
+tags: [asset/image, project/tll, system/{{ system }}, tool/comfyui]
+---
+
+![[_repos/tll/client/assets/generated/{{ system }}/{{ asset }}]]
+
+# {{ asset }}
+
+<!-- Body is human-owned. Sorter never touches anything below the frontmatter+embed. -->

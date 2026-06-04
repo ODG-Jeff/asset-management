@@ -1,0 +1,17 @@
+---
+asset: {{ asset }}
+project: {{ project }}
+source-tool: blender
+hash: sha256:{{ hash }}
+size: {{ size }}
+mime: application/x-blender
+ingested: {{ ingested }}
+sorter-rule: {{ rule }}
+canonical-path: {{ canonical_path }}
+ingested-from: {{ ingested_from }}
+tags: [asset/blender-source, project/{{ project }}, tool/blender]
+---
+
+# {{ asset }}
+
+<!-- Body is human-owned. Sorter never touches anything below the frontmatter+embed. -->

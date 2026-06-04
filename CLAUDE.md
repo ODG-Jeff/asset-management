@@ -29,3 +29,12 @@ asset-management/
 ## Workspace context
 
 This is a tooling repo, not a game. Sits alongside `tll/`, `dhtw/`, `dhtw-tabletop/` in `C:\ODG\repos\`. PowerShell for filesystem walks; Python+pandas for CSV analysis.
+
+## v1 status
+
+Phase 0 scaffolding (the original PowerShell audit script) and v1 (`odg-sorter` Python daemon) are both live:
+
+- Audit: `scripts/Audit-ODGFiles.ps1` (PowerShell, ad-hoc audits).
+- Sorter: `odg-sorter` (Python, continuous watcher). Source: `src/odg_sorter/`. Run as `odg-sorter daemon`.
+- Find-layer: Obsidian vault sidecars under `Opal Dragonfly Games/Projects/<project>/Assets/`.
+- Backfill: deferred to v1.1.

@@ -1,0 +1,18 @@
+---
+asset: {{ asset }}
+project: dhtw-tabletop
+hash: sha256:{{ hash }}
+size: {{ size }}
+mime: {{ mime }}
+ingested: {{ ingested }}
+sorter-rule: {{ rule }}
+canonical-path: {{ canonical_path }}
+ingested-from: {{ ingested_from }}
+tags: [asset/image, project/dhtw-tabletop, component/card]
+---
+
+![[_repos/dhtw-tabletop/components/cards/fronts/{{ asset }}]]
+
+# {{ asset }}
+
+<!-- Body is human-owned. Sorter never touches anything below the frontmatter+embed. -->

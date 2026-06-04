@@ -14,3 +14,15 @@ Thumbs.db
 
 # Brainstorming session content (per-machine, not shared)
 .superpowers/
+
+# Derived spec HTML (regenerable from the .md)
+docs/superpowers/specs/*.html
+
+# Python packaging and distribution
+dist/
+*.egg-info/
+__pycache__/
+.pytest_cache/
+
+# odg-sorter data
+data/

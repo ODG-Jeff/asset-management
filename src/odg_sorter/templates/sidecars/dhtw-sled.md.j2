@@ -1,0 +1,25 @@
+---
+asset: {{ asset }}
+project: dhtw
+theme: {{ theme }}
+source-tool: {{ source_tool }}
+workflow: {{ workflow }}
+model: {{ model }}
+seed: {{ seed }}
+prompt: |
+  {{ prompt | indent(2) }}
+hash: sha256:{{ hash }}
+size: {{ size }}
+mime: {{ mime }}
+ingested: {{ ingested }}
+sorter-rule: {{ rule }}
+canonical-path: {{ canonical_path }}
+ingested-from: {{ ingested_from }}
+tags: [asset/image, project/dhtw, theme/{{ theme }}, workflow/{{ workflow }}, tool/comfyui]
+---
+
+![[_repos/dhtw/assets/sleds/themes/{{ theme }}/{{ asset }}]]
+
+# {{ asset }}
+
+<!-- Body is human-owned. Sorter never touches anything below the frontmatter+embed. -->

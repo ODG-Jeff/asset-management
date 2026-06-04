@@ -45,7 +45,7 @@ class Heartbeat:
 class State:
     def __init__(self, db_path: Path) -> None:
         db_path.parent.mkdir(parents=True, exist_ok=True)
-        self._conn = sqlite3.connect(db_path, isolation_level=None)
+        self._conn = sqlite3.connect(db_path, isolation_level=None, check_same_thread=False)
         self._conn.executescript(SCHEMA)
 
     def find_by_hash(self, hash_: str) -> RouteRow | None:

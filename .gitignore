@@ -14,3 +14,6 @@ Thumbs.db
 
 # Brainstorming session content (per-machine, not shared)
 .superpowers/
+
+# Derived spec HTML (regenerable from the .md)
+docs/superpowers/specs/*.html

@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "odg-sorter"
+version = "0.1.0"
+description = "Asset sorter for the ODG studio."
+requires-python = ">=3.11"
+dependencies = [
+    "watchdog>=4",
+    "Pillow>=10",
+    "Jinja2>=3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+odg-sorter = "odg_sorter.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+odg_sorter = ["templates/sidecars/*.j2"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

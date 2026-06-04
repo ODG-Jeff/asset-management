@@ -34,7 +34,13 @@ def main(argv: list[str] | None = None) -> int:
         print(result)
         return 0
     if args.cmd == "digest":
-        print("digest not yet wired")
+        from odg_sorter.config.paths import UNSORTED, VAULT
+        from odg_sorter.digest import generate_digest
+        from odg_sorter.main import STATE_PATH
+        from odg_sorter.state import State
+        state = State(STATE_PATH)
+        out = generate_digest(state=state, vault_root=VAULT, unsorted_root=UNSORTED, period_days=7)
+        print(f"wrote: {out}")
         return 0
 
 
